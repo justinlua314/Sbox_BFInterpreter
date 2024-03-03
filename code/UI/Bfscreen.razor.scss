@@ -1,0 +1,163 @@
+Bfscreen {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #444;
+	font-weight: bold;
+	flex-direction: column;
+	padding: 20px;
+	pointer-events: all;
+
+	.title {
+		font-size: 42px;
+		font-family: Poppins;
+		color: #fff;
+	}
+
+	.main_hud {
+		flex-direction: row;
+		z-index: 1;
+	}
+
+	.info_box {
+		flex-direction: column;
+	}
+
+	.info_tabs {
+		flex-direction: row;
+		padding: 5px;
+		height: 5%;
+		margin-bottom: 1%;
+	}
+
+	.info_ascii {
+		width: 49.7%;
+		margin-right: 0.6%;
+	}
+
+	.info_docs {
+		width: 49.7%;
+	}
+
+	.code_box {
+		width: 41%;
+		margin-right: 0.5%;
+		flex-direction: column;
+	}
+
+	.code {
+		background-color: #888;
+		font-size: 28px;
+		height: 91%;
+		margin-bottom: 1%;
+		overflow: scroll;
+
+		label {
+			white-space: pre;
+		}
+	}
+
+	.info_box {
+		background-color: #888;
+		width: 27%;
+		margin-right: 0.5%;
+	}
+
+	.button_group_one {
+		height: 10%;
+	}
+
+
+	.bf_info {
+		flex-direction: column;
+		width: 31%;
+	}
+
+	.stdout {
+		height: 25%;
+		background-color: #3273eb;
+		color: #fff;
+		margin-bottom: 10px;
+		font-size: 28px;
+		padding: 10px;
+		font-family: Poppins;
+	}
+
+	.memory_box {
+		height: 65%;
+		font-size: 20px;
+		font-family: Consolas;
+		background-color: #888;
+		white-space: pre;
+		flex-wrap: wrap;
+		overflow-y: scroll;
+		margin-bottom: 10px;
+	}
+
+
+	button {
+		background-color: #eee;
+		justify-content: center;
+		align-items: center;
+		border-color: #000;
+	}
+
+	button:hover {
+		background-color: #ccc;
+		justify-content: center;
+		align-items: center;
+	}
+
+	button:active {
+		background-color: #bbb;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.bf_buttons {
+		flex-direction: row;
+		height: 10%;
+	}
+
+	.button_compile {
+		width: 33%;
+		margin-right: 0.5%;
+	}
+
+	.button_reset {
+		width: 33%;
+		margin-right: 0.5%;
+	}
+
+	.button_run {
+		width: 33%;
+	}
+
+	.button_debug {
+		width: 33%;
+		margin-right: 0.5%;
+
+		&.debugging {
+			background-color: #99e;
+		}
+
+		&.debugging:hover {
+			background-color: #77e;
+		}
+
+		&.debugging:active {
+			background-color: #66e;
+		}
+	}
+
+	.button_step {
+		width: 33%;
+		margin-right: 0.5%;
+	}
+
+	.button_skip {
+		width: 33%;
+	}
+}

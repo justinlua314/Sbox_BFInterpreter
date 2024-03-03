@@ -1,0 +1,40 @@
+Bfkeyboard {
+	position: absolute;
+	top: 30.5%;
+	left: 68.6%;
+	right: 0.65%;
+	bottom: 11.5%;
+	font-weight: bold;
+	z-index: 10;
+	flex-direction: column;
+	pointer-events: all;
+	margin: 0px;
+	padding: 0px;
+
+	.input_box {
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		background-color: #563461;
+		font-family: Poppins;
+		font-size: 48px;
+		height: 100%;
+		opacity: 0;
+		white-space: pre;
+		flex-direction: column;
+
+		&.visible {
+			opacity: 1;
+		}
+	}
+
+	.button_panel {
+		background-color: #765481;
+		width: 50%;
+		align-self: center;
+		justify-content: center;
+		align-items: center;
+		border-width: 10px;
+		border-color: black;
+	}
+}

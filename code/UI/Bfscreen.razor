@@ -1,0 +1,169 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits PanelComponent
+
+<root>
+	<div class="title">S&box BFInterpreter</div>
+	<div class="main_hud">
+		<div class="info_box">
+			<div class="info_tabs">
+				<button class="info_ascii" onclick=@ShowAscii>Ascii Chart</button>
+				<button class="info_docs" onclick=@ShowDocs>Documentation</button>
+			</div>
+		</div>
+
+		<div class="code_box">
+			<CodeBox @ref=Code class="code"></CodeBox>
+			<div class="button_group_one">
+				<button class="button_compile" onclick=@CompileCode>Compile Code to Clipboard</button>
+				<button class="button_reset" onclick=@BFI.ResetInterpreter>Reset Interpreter</button>
+				<button class="button_run" onclick=@RunCode>Run Code</button>
+			</div>
+		</div>
+
+		
+
+		<div class="bf_info">
+			<div class="stdout">@BFI.StdOutString</div>
+
+			<div class="memory_box">
+				@for (int index = 0; index < BFI.Memory.Count; index++) {
+					<span>@BFI.CellRepr(index)</span>
+				}
+			</div>
+
+			<div class="bf_buttons">
+				<button class="button_debug @(BFI.Debug ? "debugging": "")" onclick=@Debug>Debug</button>
+				<button class="button_step" onclick=@SendDebugStep>Step</button>
+				<button class="button_skip" onclick=@SendDebugSkip>Skip</button>
+			</div>
+		</div>
+	</div>
+</root>
+
+@code
+{
+	public class CodeBox : TextEntry {
+		public CodeBox() {
+			this.Multiline = true;
+		}
+
+		public int GetLinePosition() {
+			string[] lines = this.Text.Split('\n');
+			return lines.Last().Length;
+		}
+
+		public int GetLineNumber() {
+			int line = 0;
+
+			for (int index = 0; index < this.CaretPosition; index++) {
+				if (this.Label.Text[index] == '\n') { line++; }
+			}
+
+			return line;
+		}
+
+		public void AutoTab() {
+			int pos = this.GetLinePosition();
+
+			if (pos % 4 == 0) {
+				for (int i = 0; i < 4; i++) { OnKeyTyped(' '); }
+			} else {
+				while (pos % 4 != 0) {
+					OnKeyTyped(' ');
+					pos++;
+				}
+			}
+		}
+
+		public override void OnButtonTyped(ButtonEvent e) {
+			if (!e.Pressed) {
+				base.OnButtonTyped(e);
+				return;
+			}
+
+			var button = e.Button;
+
+			// Log.Info(button);
+
+			if (button == "tab") {
+				this.AutoTab();
+				return;
+			}
+
+			if (button == "lbracket") {
+				this.Label.InsertText("]", this.CaretPosition + 1);
+				return;
+			}
+
+			if (button == "enter" || button == "pad_enter") {
+				string[] lines = this.Text.Split('\n');
+				string previousLine = lines[this.GetLineNumber()];
+
+				if (previousLine == "") {
+					base.OnButtonTyped(e);
+					return;
+				}
+
+				Log.Info($"{previousLine.Length}");
+
+				if (previousLine.Length > 0 && previousLine[0] == ' ') {
+					int index = 0;
+
+					this.Label.InsertText("\n", this.CaretPosition);
+					this.Label.MoveCaretPos(1);
+
+					while (index < previousLine.Length && previousLine[index] == ' ') {
+						this.Label.InsertText(" ", this.CaretPosition);
+						this.Label.MoveCaretPos(1);
+						index++;
+					}
+
+					return;
+				} else {
+					Log.Info($"Debug {previousLine[0]}");
+				}
+			}
+
+			base.OnButtonTyped(e);
+		}
+	}
+
+	public CodeBox Code;
+
+	private void ShowAscii() {
+		BFI.Components.Get<Documentation>(true).Enabled = false;
+		BFI.Components.Get<AsciiChart>(true).Enabled = true;
+	}
+
+	private void ShowDocs() {
+		BFI.Components.Get<AsciiChart>(true).Enabled = false;
+		BFI.Components.Get<Documentation>(true).Enabled = true;
+	}
+
+	[Property]
+	private Bfinterpreter BFI = new();
+
+	public void RunCode() {
+		BFI.Code = Code.Label.Text;
+		BFI.Run();
+	}
+
+	void CompileCode() {
+		BFI.Code = Code.Label.Text;
+		BFI.CompileCode();
+	}
+
+	public void Debug() {
+		BFI.Debug = !BFI.Debug;
+	}
+
+	public void SendDebugStep() { BFI.DebugStep = true; }
+	public void SendDebugSkip() { BFI.DebugSkipping = true; BFI.DebugStep = true; }
+
+	/// <summary>
+	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+	/// </summary>
+	protected override int BuildHash() => System.HashCode.Combine(BFI.Memory[BFI.MemPointer]) +
+	System.HashCode.Combine(BFI.MemPointer) + System.HashCode.Combine(BFI.StdOutString);
+}

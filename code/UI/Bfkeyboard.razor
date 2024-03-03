@@ -1,0 +1,44 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits PanelComponent
+
+<root>
+	<div class="input_box focus=@BFI.AwaitingInput @(BFI.AwaitingInput ? "visible": "")">
+Interpreter awaiting input
+Type a key and hit enter to submit a char to memory
+		<textentry @ref=InputBuffer onsubmit=@SubmitChar class="button_panel"></textentry>
+	</div>
+</root>
+
+@code
+{
+	[Property]
+	private Bfinterpreter BFI = new();
+
+	TextEntry InputBuffer = new();
+
+	void SubmitChar() {
+		char buffer = new();
+		string submitted = InputBuffer.Label.Text;
+
+		if (submitted.Length > 0) {
+			buffer = submitted[0];
+		}
+
+		BFI.Memory[BFI.MemPointer] = (byte) buffer;
+		InputBuffer.Label.Text = "";
+		BFI.AwaitingInput = false;
+	}
+
+	protected override void OnFixedUpdate() {
+		if (BFI.AwaitingInput) {
+			InputBuffer.Focus();
+		}
+	}
+
+
+	/// <summary>
+	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+	/// </summary>
+	protected override int BuildHash() => System.HashCode.Combine( BFI.AwaitingInput );
+}

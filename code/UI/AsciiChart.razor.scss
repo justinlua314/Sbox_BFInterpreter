@@ -1,0 +1,68 @@
+AsciiChart {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	font-weight: bold;
+	flex-direction: column;
+	padding: 20px;
+
+	.title_space {
+		height: 11%;
+	}
+
+	.ascii_chart {
+		width: 25%;
+		height: 89%;
+		margin-left: 1%;
+		margin-right: 1%;
+		flex-direction: column;
+		font-family: Consolas;
+		overflow: scroll;
+		pointer-events: all;
+
+		h1 {
+			font-size: 42px;
+			margin: 5px;
+			margin-left: 0px;
+			flex-shrink: 0;
+		}
+
+		h2 {
+			font-size: 36px;
+			margin-left: 0px;
+			flex-shrink: 0;
+		}
+
+		table, th, td {
+			border: 1px solid black;
+			flex-direction: column;
+			width: 100%;
+			flex-shrink: 0;
+			font-size: 24px;
+
+			th, td {
+				text-align: center;
+				flex-shrink: 1;
+			}
+
+			.header_row {
+				background-color: #9d48c2;
+			}
+
+			.even_row {
+				background-color: #ae95cf;
+			}
+
+			.odd_row {
+				background-color: #8781b8;
+			}
+		}
+
+		.section_split {
+			margin: 15px;
+			margin-top: 50px;
+		}
+	}
+}
