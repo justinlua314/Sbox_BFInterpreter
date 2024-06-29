@@ -5,12 +5,7 @@
   "Ident": "bf_interpreter",
   "Tags": "programming coding tool ide editor text puzzle learning experimental beginners",
   "Schema": 1,
-  "HasAssets": true,
-  "AssetsPath": "",
   "Resources": null,
-  "MenuResources": "*",
-  "HasCode": true,
-  "CodePath": "/code/",
   "PackageReferences": [],
   "EditorReferences": null,
   "Metadata": {

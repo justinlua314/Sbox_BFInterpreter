@@ -1,0 +1,52 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits PanelComponent
+
+<root>
+	<div class="header">
+		<div class="title">Code Examples</div>
+		<button class="back-button">BF Interpreter</button>
+	</div>
+	<div class="examples-list">
+		<div class="example-listing">
+			<div class="example-title">Hi</div>
+			<div class="example-description">Prints the string "Hi" to console</div>
+			<button class="deploy-button" onclick=@(() => DeployCode("test"))>Deploy</button>
+		</div>
+	</div>
+</root>
+
+@code {
+	/// <summary>
+	/// BFInterpreter is referenced to be enabled when example code is deployed
+	/// </summary>
+	[Property] GameObject Interpreter { get; set; }
+
+	Dictionary<string, string> Examples = new() {
+		{"test", "+++ [\n\t>++\n\t<-\n]\n>"}
+	};
+
+	void DeployCode(string id) {
+		if (Interpreter == null) { return; }
+
+		Interpreter.Enabled = true;
+
+		Bfinterpreter computer = Interpreter.Components.Get<Bfinterpreter>();
+
+		if (computer != null) {
+			computer.ResetInterpreter();
+			computer.Code = Examples[id];
+		}
+
+
+		Bfscreen screen = Interpreter.Components.Get<Bfscreen>();
+
+		if (screen != null) {
+			screen.LoadCode(Examples[id]);
+		}
+
+		Enabled = false;
+	}
+
+	protected override int BuildHash() => System.HashCode.Combine( "" );
+}

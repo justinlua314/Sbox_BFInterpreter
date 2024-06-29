@@ -3,7 +3,13 @@
 @inherits PanelComponent
 
 <root>
-	<div class="title">S&box BFInterpreter</div>
+	<div class="header">
+		<div class="title">S&box BFInterpreter</div>
+		<!--
+			Coming Soon
+		<button class="examples" onclick=@ShowExamples>Code Examples</button>
+		-->
+	</div>
 	<div class="main_hud">
 		<div class="info_box">
 			<div class="info_tabs">
@@ -144,6 +150,12 @@
 	[Property]
 	private Bfinterpreter BFI = new();
 
+
+	/// <summary>
+	/// Code Examples is referenced to be Enabled when Code Examples button is pressed
+	/// </summary>
+	[Property] GameObject CodeExamples { get; set; }
+
 	public void RunCode() {
 		BFI.Code = Code.Label.Text;
 		BFI.Run();
@@ -156,6 +168,17 @@
 
 	public void Debug() {
 		BFI.Debug = !BFI.Debug;
+	}
+
+	void ShowExamples() {
+		if (CodeExamples == null) { return; }
+
+		CodeExamples.Enabled = true;
+		GameObject.Enabled = false;
+	}
+
+	public void LoadCode(string code) {
+		Code.Label.Text = code;
 	}
 
 	public void SendDebugStep() { BFI.DebugStep = true; }

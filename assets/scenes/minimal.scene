@@ -1,0 +1,200 @@
+{
+  "__guid": "9f832399-4887-46b0-8f21-2ee284f538e2",
+  "GameObjects": [
+    {
+      "__guid": "3ee1c9f4-07be-4e0b-8b23-67bee2d8ec8a",
+      "Flags": 0,
+      "Name": "Camera",
+      "Position": "0,0,10",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "Components": [
+        {
+          "__type": "Sandbox.CameraComponent",
+          "__guid": "5a9bcb46-ce6a-47e3-8ac3-f988ab33dd9d",
+          "BackgroundColor": "0.33333,0.46275,0.52157,1",
+          "ClearFlags": "All",
+          "FieldOfView": 60,
+          "IsMainCamera": true,
+          "Orthographic": false,
+          "OrthographicHeight": 1204,
+          "Priority": 1,
+          "RenderExcludeTags": "",
+          "RenderTags": "",
+          "TargetEye": "None",
+          "Viewport": "0,0,1,1",
+          "ZFar": 10000,
+          "ZNear": 10
+        },
+        {
+          "__type": "Sandbox.Bloom",
+          "__guid": "09b6a577-5ffb-42da-ad9d-def5f3ee70ca",
+          "BloomColor": {
+            "color": [
+              {
+                "c": "1,1,1,1"
+              },
+              {
+                "t": 1,
+                "c": "1,1,1,1"
+              }
+            ],
+            "alpha": []
+          },
+          "BloomCurve": [
+            {
+              "y": 0.5
+            },
+            {
+              "x": 1,
+              "y": 1
+            }
+          ],
+          "Mode": "Additive",
+          "Strength": 0.5,
+          "Threshold": 0.5,
+          "ThresholdWidth": 0.5
+        },
+        {
+          "__type": "Sandbox.Tonemapping",
+          "__guid": "b292df58-38bb-4043-8b5a-12eb8ab90c83",
+          "__version": 1,
+          "ExposureBias": 2,
+          "ExposureCompensation": 0,
+          "ExposureMethod": "RGB",
+          "MaximumExposure": 2,
+          "MinimumExposure": 1,
+          "Mode": "Legacy",
+          "Rate": 1
+        },
+        {
+          "__type": "Sandbox.Sharpen",
+          "__guid": "9333099a-b9ee-47ca-82f3-d9a8ec14d78e",
+          "Scale": 0.2
+        }
+      ]
+    },
+    {
+      "__guid": "426606a0-be51-4932-aaef-ef8e9070e7cf",
+      "Flags": 0,
+      "Name": "BFInterpreter",
+      "Position": "50,0,10",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "Components": [
+        {
+          "__type": "Sandbox.ScreenPanel",
+          "__guid": "e6f81126-dc83-49fc-b546-628f3cd527fb",
+          "AutoScreenScale": true,
+          "Opacity": 1,
+          "Scale": 1,
+          "ZIndex": 100
+        },
+        {
+          "__type": "Bfinterpreter",
+          "__guid": "0836323a-c005-4fe1-a744-8cd8d74f5581",
+          "CycleLimit": 1000000,
+          "LoopTokenLimit": 100000
+        },
+        {
+          "__type": "Bfscreen",
+          "__guid": "25775412-da96-4fe1-86ce-e41b0555a028",
+          "BFI": {
+            "_type": "component",
+            "component_id": "0836323a-c005-4fe1-a744-8cd8d74f5581",
+            "go": "426606a0-be51-4932-aaef-ef8e9070e7cf",
+            "component_type": "Bfinterpreter"
+          },
+          "CodeExamples": {
+            "_type": "gameobject",
+            "go": "985acc43-c9fd-4533-886b-2d77dadea667"
+          }
+        },
+        {
+          "__type": "Bfkeyboard",
+          "__guid": "c6341776-1e37-4b76-a3d5-1c05ee60a7bf",
+          "BFI": {
+            "_type": "component",
+            "component_id": "0836323a-c005-4fe1-a744-8cd8d74f5581",
+            "go": "426606a0-be51-4932-aaef-ef8e9070e7cf",
+            "component_type": "Bfinterpreter"
+          }
+        },
+        {
+          "__type": "Documentation",
+          "__guid": "1c908f70-5bb4-4447-80a7-34b90041b2db",
+          "__enabled": false
+        },
+        {
+          "__type": "AsciiChart",
+          "__guid": "8148e718-858b-4db1-bd10-f8dcaa7e1ee6",
+          "__enabled": false
+        },
+        {
+          "__type": "CodeExamples",
+          "__guid": "b6f08a0c-3337-4a62-985f-6eb90ecb8f10",
+          "__enabled": false,
+          "Interpreter": {
+            "_type": "gameobject",
+            "go": "426606a0-be51-4932-aaef-ef8e9070e7cf"
+          }
+        }
+      ]
+    },
+    {
+      "__guid": "985acc43-c9fd-4533-886b-2d77dadea667",
+      "Flags": 0,
+      "Name": "Code Examples",
+      "Position": "300,0,10",
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "Components": [
+        {
+          "__type": "Sandbox.ScreenPanel",
+          "__guid": "c5db11e5-91ec-4ebf-8100-94238b1c9fc4",
+          "AutoScreenScale": true,
+          "Opacity": 1,
+          "Scale": 1,
+          "ZIndex": 100
+        },
+        {
+          "__type": "CodeExamples",
+          "__guid": "3d90b02a-ac82-4b3d-86e0-d7fb41a50063",
+          "Interpreter": {
+            "_type": "gameobject",
+            "go": "426606a0-be51-4932-aaef-ef8e9070e7cf"
+          }
+        }
+      ]
+    }
+  ],
+  "SceneProperties": {
+    "FixedUpdateFrequency": 50,
+    "MaxFixedUpdates": 5,
+    "NetworkFrequency": 60,
+    "NetworkInterpolation": true,
+    "ThreadedAnimation": true,
+    "TimeScale": 1,
+    "UseFixedUpdate": true,
+    "NavMesh": {
+      "Enabled": false,
+      "IncludeStaticBodies": true,
+      "IncludeKeyframedBodies": true,
+      "EditorAutoUpdate": true,
+      "AgentHeight": 64,
+      "AgentRadius": 16,
+      "AgentStepSize": 18,
+      "AgentMaxSlope": 40,
+      "ExcludedBodies": "",
+      "IncludedBodies": ""
+    }
+  },
+  "Title": "minimal",
+  "Description": "",
+  "LastSaved": "2024-06-29T15:26:31.1350192-04:00",
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}
